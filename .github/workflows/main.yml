@@ -1,0 +1,34 @@
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  push:
+    branches:
+      - 'master'
+      
+jobs:
+  run_status_check: 
+    runs-on: "ubuntu-latest"
+    env:
+      SB_API_ENDPOINT: "${{ secrets.SB_API_ENDPOINT }}"
+      SB_AUTH_TOKEN: "${{ secrets.SB_AUTH_TOKEN }}"
+      GEN3_CREDS: "${{ secrets.GEN3_CREDS }}"
+      PICSURE_AUTH_TOKEN: "${{ secrets.PICSURE_AUTH_TOKEN }}"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          date && date -u
+          pwd
+          export PYTHONIOENCODING=utf-8
+          apt-get update && apt-get install -y python3.8 python3.8-dev python3-pip python-pip virtualenv git apt-transport-https ca-certificates gnupg curl software-properties-common
+          echo -n "${{ secrets.ENCODED_GOOGLE_APPLICATION_CREDENTIALS }}" | base64 -d > gcp-creds.json
+      - name: Run Job
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-venv
+          python3 -m venv ./venv
+          source ./venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          python run.py
