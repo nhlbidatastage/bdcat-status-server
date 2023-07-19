@@ -7,7 +7,7 @@ on:
       
 jobs:
   run_status_check: 
-    runs-on: "ubuntu-latest"
+    runs-on: "python:3.9.17"
     env:
       SB_API_ENDPOINT: "${{ secrets.SB_API_ENDPOINT }}"
       SB_AUTH_TOKEN: "${{ secrets.SB_AUTH_TOKEN }}"
@@ -19,19 +19,13 @@ jobs:
       - name: Install dependencies
         run: |
           date && date -u
-          pwd
           export PYTHONIOENCODING=utf-8
           apt-get update && apt-get install -y python3.9 python3.9-dev python3-pip  python-pip virtualenv git apt-transport-https ca-certificates gnupg curl software-properties-common
-          sudo add-apt-repository ppa:deadsnakes/ppa
-          sudo apt-get install python3.9
-          ls /usr/bin/
-          python --version
           echo -n "${{ secrets.ENCODED_GOOGLE_APPLICATION_CREDENTIALS }}" | base64 -d > gcp-creds.json
       - name: Run Job
         run: |
-          sudo apt-get update
-          /usr/bin/python3.9 --version
-          /usr/bin/python3.9 -m venv ./venv
+          python --version
+          python -m venv ./venv
           source ./venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
