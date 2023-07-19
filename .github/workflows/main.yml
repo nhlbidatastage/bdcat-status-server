@@ -22,6 +22,7 @@ jobs:
           pwd
           export PYTHONIOENCODING=utf-8
           apt-get update && apt-get install -y python3.9 python3.9-dev python3-pip  python-pip virtualenv git apt-transport-https ca-certificates gnupg curl software-properties-common
+          sudo add-apt-repository ppa:deadsnakes/ppa
           sudo apt-get install python3.9
           ls /usr/bin/
           python --version
