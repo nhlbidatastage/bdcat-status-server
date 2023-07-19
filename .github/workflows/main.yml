@@ -23,7 +23,7 @@ jobs:
           export PYTHONIOENCODING=utf-8
           apt-get update && apt-get install -y python3.9 python3.9-dev python3-pip  python-pip virtualenv git apt-transport-https ca-certificates gnupg curl software-properties-common
           sudo apt-get install python3.9
-          /usr/bin/python3.9 --version
+          python --version
           echo -n "${{ secrets.ENCODED_GOOGLE_APPLICATION_CREDENTIALS }}" | base64 -d > gcp-creds.json
       - name: Run Job
         run: |
