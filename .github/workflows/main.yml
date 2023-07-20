@@ -24,9 +24,13 @@ jobs:
           echo -n "${{ secrets.ENCODED_GOOGLE_APPLICATION_CREDENTIALS }}" | base64 -d > gcp-creds.json
       - name: Run Job
         run: |
-          python3 --version
-          python3 -m venv ./venv
+          sudo add-apt-repository ppa:deadsnakes/ppa
+          sudo apt update 
+          sudo apt install python3.9 
+          python3.9 --version
+          python3.9 -m venv ./venv
           source ./venv/bin/activate
+          python --version
           pip3 install --upgrade pip
           pip3 install -r requirements.txt
-          python3 run.py
+          python run.py
