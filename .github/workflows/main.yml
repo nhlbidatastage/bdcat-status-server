@@ -7,7 +7,7 @@ on:
       
 jobs:
   run_status_check: 
-    runs-on: "python:3.9.17"
+    runs-on: "ubuntu-latest"
     env:
       SB_API_ENDPOINT: "${{ secrets.SB_API_ENDPOINT }}"
       SB_AUTH_TOKEN: "${{ secrets.SB_AUTH_TOKEN }}"
