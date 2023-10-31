@@ -63,10 +63,10 @@ def post_svg(system: str, subsystem: str, ok: Union[bool, str]):
 #         s3.Object(bucket, key).put(Body=SERVICE_UNKNOWN, ACL='public-read', ContentType='image/svg+xml')
     if ok is True:
 #         s3.Object(bucket, key).put(Body=SERVICE_OK, ACL='public-read', ContentType='image/svg+xml')
-        post_status_to_big_query(system=system, subsystem=subsystem, up=1, create=False)
+        post_status_to_big_query(system=system, subsystem=subsystem, up=1, create=True)
     elif ok is False:
 #         s3.Object(bucket, key).put(Body=SERVICE_ERROR, ACL='public-read', ContentType='image/svg+xml')
-        post_status_to_big_query(system=system, subsystem=subsystem, up=0, create=False)
+        post_status_to_big_query(system=system, subsystem=subsystem, up=0, create=True)
     else:
         raise RuntimeError(f'Unknown value for "ok" status: {ok}')
 #     print(f'{"OKAY" if ok else "----"}: {(bucket, key)}')
@@ -341,11 +341,12 @@ def post_pic_sure_svgs():
                 subsystem='overall',
                 ok=response.text == 'RUNNING')
 
-# May no longer be needed if getting rid of S3
-# def post_time_svg():
-#     post_svg(system='last_updated',
-#              subsystem='overall',
-#              ok='Time')
+def post_pic_sure_without_login_svgs():
+    response = requests.get('https://openpicsure.biodatacatalyst.nhlbi.nih.gov/picsure/system/status')
+    # real_usage_response = picsure_realtime_status()
+    post_svg(system='pic_sure_without_login',
+             subsystem='system_status',
+             ok=response.text == 'RUNNING')
 
 
 def post_ras_svg():
@@ -394,6 +395,7 @@ def picsure_realtime_status():
     except Exception as e:  # if not authorized, this returns a KeyError
         print(f'Failed to get status from PIC-SURE:\n{e}')
         return False
+
 
 
 def sevenbridges_realtime_status():
