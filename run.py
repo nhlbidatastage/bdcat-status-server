@@ -494,7 +494,7 @@ def sevenbridges_realtime_status():
 
 def poll_endpoints():
     for system in ('Terra', 'Dockstore', 'Seven Bridges', 'BioCat Documentation', 'Gen3', 'Integration Tests',
-                   'HeLx', 'PIC-SURE', 'Bond', 'Leonardo', 'RAS'):
+                   'HeLx', 'PIC-SURE', 'PIC-SURE-WO-LOGIN', 'Bond', 'Leonardo', 'RAS'):
         if system == 'Terra':
             post_terra_svgs()
         elif system == 'Dockstore':
@@ -514,6 +514,8 @@ def poll_endpoints():
 #             post_helx_svgs()
         elif system == 'PIC-SURE':
             post_pic_sure_svgs()
+        elif system == 'PIC-SURE-WO-LOGIN':
+            post_pic_sure_without_login_svgs()
         elif system == 'Bond':
             post_bond_svgs()
         elif system == 'Leonardo':
