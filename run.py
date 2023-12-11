@@ -151,9 +151,14 @@ def post_terra_svgs():
         if response.ok:
             if subsystem not in response_json['systems'] or not response_json['systems'][subsystem]['ok']:
                 all_healthy = False
-            post_svg(system=system,
+            try:
+                post_svg(system=system,
+                         subsystem=subsystem,
+                         ok=response_json['systems'][subsystem]['ok'])
+            except KeyError:
+                post_svg(system=system,
                      subsystem=subsystem,
-                     ok=response_json['systems'][subsystem]['ok'])
+                     ok=False)
         else:
             post_svg(system=system,
                      subsystem=subsystem,
