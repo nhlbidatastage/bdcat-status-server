@@ -146,7 +146,7 @@ def post_terra_svgs():
     if response.ok:
         response_json = response.json()
     all_healthy = True
-    for subsystem in ("Thurloe", "Sam", "Consent", "Rawls",
+    for subsystem in ("Thurloe", "Sam", "Rawls",
                       "Agora", "GoogleBuckets", "LibraryIndex", "OntologyIndex"):
         if response.ok:
             if subsystem not in response_json['systems'] or not response_json['systems'][subsystem]['ok']:
