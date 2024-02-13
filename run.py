@@ -184,7 +184,7 @@ def post_dockstore_svgs():
             endpoint = f'https://{subsystem}'
             response = requests.head(endpoint)
         elif subsystem == 'dockstore webservice':
-            endpoint = 'https://dockstore.org/api/swagger.json'
+            endpoint = 'https://dockstore.org/api/openapi.yaml'
             response = requests.head(endpoint)
         elif subsystem == 'dockstore search':
             endpoint = 'https://dockstore.org/api/metadata/elasticSearch'
