@@ -1,9 +1,9 @@
-boto3==1.34.126
+boto3
 gen3
 sevenbridges-python
 google-api-core==2.11.0
 google-auth==2.16.0
-google-cloud-bigquery==2.31.0
+google-cloud-bigquery==3.24.0
 google-cloud-core==2.3.2
 google-cloud-storage==1.44.0
 google-crc32c==1.5.0
