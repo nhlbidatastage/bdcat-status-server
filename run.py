@@ -346,12 +346,12 @@ def post_pic_sure_svgs():
                 subsystem='overall',
                 ok=response.text == 'RUNNING')
 
-def post_pic_sure_without_login_svgs():
-    response = requests.get('https://openpicsure.biodatacatalyst.nhlbi.nih.gov/picsure/system/status')
-    # real_usage_response = picsure_realtime_status()
-    post_svg(system='pic_sure_without_login',
-             subsystem='system_status',
-             ok=response.text == 'RUNNING')
+# def post_pic_sure_without_login_svgs():
+#     response = requests.get('https://openpicsure.biodatacatalyst.nhlbi.nih.gov/picsure/system/status')
+#     # real_usage_response = picsure_realtime_status()
+#     post_svg(system='pic_sure_without_login',
+#              subsystem='system_status',
+#              ok=response.text == 'RUNNING')
 
 
 def post_ras_svg():
@@ -499,13 +499,14 @@ def sevenbridges_realtime_status():
 
 def poll_endpoints():
     for system in ('Terra', 'Dockstore', 'Seven Bridges', 'BioCat Documentation', 'Gen3', 'Integration Tests',
-                   'HeLx', 'PIC-SURE', 'PIC-SURE-WO-LOGIN', 'Bond', 'Leonardo', 'RAS'):
+                   'HeLx', 'PIC-SURE', 'Bond', 'Leonardo', 'RAS'):
         if system == 'Terra':
             post_terra_svgs()
         elif system == 'Dockstore':
             post_dockstore_svgs()
         elif system == 'Seven Bridges':
-            post_seven_bridges_svgs()
+            pass
+            # post_seven_bridges_svgs()
         elif system == 'BioCat Documentation':
             post_biocat_documentation_svgs()
         elif system == 'Gen3':
@@ -519,8 +520,6 @@ def poll_endpoints():
 #             post_helx_svgs()
         elif system == 'PIC-SURE':
             post_pic_sure_svgs()
-        elif system == 'PIC-SURE-WO-LOGIN':
-            post_pic_sure_without_login_svgs()
         elif system == 'Bond':
             post_bond_svgs()
         elif system == 'Leonardo':
