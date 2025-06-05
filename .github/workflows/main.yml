@@ -7,13 +7,16 @@ on:
       
 jobs:
   run_status_check: 
-    runs-on: "python:3.9-alpine"
+    runs-on: "ubuntu-latest"
     env:
       SB_API_ENDPOINT: "${{ secrets.SB_API_ENDPOINT }}"
       SB_AUTH_TOKEN: "${{ secrets.SB_AUTH_TOKEN }}"
       GEN3_CREDS: "${{ secrets.GEN3_CREDS }}"
       PICSURE_AUTH_TOKEN: "${{ secrets.PICSURE_AUTH_TOKEN }}"
     steps:
+      - uses: actions/setup-python@v5
+        with:
+            python-version: '3.13' 
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Install dependencies
