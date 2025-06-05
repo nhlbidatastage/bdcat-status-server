@@ -31,6 +31,7 @@ jobs:
           sudo apt-get install -y python3.9-dev
           python3.9 -m venv ./venv
           source ./venv/bin/activate
+          pip3 install setuptools
           pip3 install --upgrade pip
           pip3 install -r requirements.txt
           python run.py
