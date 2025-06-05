@@ -27,7 +27,7 @@ jobs:
           sudo add-apt-repository ppa:deadsnakes/ppa
           sudo apt update 
           sudo apt install python3.9 
-          python3.9 --version
+          sudo apt install python3.9-distutils
           python3.9 -m pip install --upgrade pip
           python3.9 -m pip install -r requirements.txt
           python3.9 run.py
