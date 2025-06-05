@@ -10,4 +10,3 @@ google-resumable-media==2.4.1
 googleapis-common-protos==1.58.0
 git+https://github.com/hms-dbmi/pic-sure-python-client.git
 git+https://github.com/hms-dbmi/pic-sure-python-adapter-hpds.git
-pandas
