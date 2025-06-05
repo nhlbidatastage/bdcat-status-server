@@ -3,11 +3,11 @@ on:
     - cron: "*/5 * * * *"
   push:
     branches:
-      - 'main'
+      - '*'
       
 jobs:
   run_status_check: 
-    runs-on: "ubuntu-latest"
+    runs-on: "python:3.9-alpine"
     env:
       SB_API_ENDPOINT: "${{ secrets.SB_API_ENDPOINT }}"
       SB_AUTH_TOKEN: "${{ secrets.SB_AUTH_TOKEN }}"
@@ -20,16 +20,8 @@ jobs:
         run: |
           date && date -u
           export PYTHONIOENCODING=utf-8
-          apt-get update && apt-get install -y python3.9 python3.9-dev python3.9-pip  python-pip virtualenv git apt-transport-https ca-certificates gnupg curl software-properties-common
           echo -n "${{ secrets.ENCODED_GOOGLE_APPLICATION_CREDENTIALS }}" | base64 -d > gcp-creds.json
       - name: Run Job
         run: |
-          sudo add-apt-repository ppa:deadsnakes/ppa
-          sudo apt update 
-          sudo apt install python3.9 
-          sudo apt install python3.9-distutils
-          python3.9 -m venv ./venv
-          source ./venv/bin/activate
-          pip install setuptools
-          pip3 install -r requirements.txt
+          pip install -r requirements.txt
           python run.py
